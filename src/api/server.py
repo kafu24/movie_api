@@ -32,8 +32,8 @@ app = FastAPI(
     description=description,
     version="0.0.1",
     contact={
-        "name": "Lucas Pierce",
-        "email": "lupierce@calpoly.edu",
+        "name": "Gordon Luu",
+        "email": "gjluu@calpoly.edu",
     },
     openapi_tags=tags_metadata,
 )
