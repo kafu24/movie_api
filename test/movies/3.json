@@ -1,0 +1,31 @@
+{
+    "movie_id": 3,
+    "title": "2001: a space odyssey",
+    "top_characters": [
+      {
+        "character_id": 50,
+        "character": "BOWMAN",
+        "num_lines": 58
+      },
+      {
+        "character_id": 55,
+        "character": "FLOYD",
+        "num_lines": 56
+      },
+      {
+        "character_id": 60,
+        "character": "POOLE",
+        "num_lines": 49
+      },
+      {
+        "character_id": 56,
+        "character": "HAL",
+        "num_lines": 38
+      },
+      {
+        "character_id": 59,
+        "character": "PILOT",
+        "num_lines": 14
+      }
+    ]
+  }

@@ -1,0 +1,86 @@
+{
+  "character_id": 6967,
+  "character": "TERRY",
+  "movie": "on the waterfront",
+  "gender": "M",
+  "top_conversations": [
+    {
+      "character_id": 6953,
+      "character": "EDIE",
+      "gender": "F",
+      "number_of_lines_together": 220
+    },
+    {
+      "character_id": 6951,
+      "character": "CHARLEY",
+      "gender": "M",
+      "number_of_lines_together": 69
+    },
+    {
+      "character_id": 6961,
+      "character": "JOHNNY",
+      "gender": "M",
+      "number_of_lines_together": 45
+    },
+    {
+      "character_id": 6955,
+      "character": "GLOVER",
+      "gender": "M",
+      "number_of_lines_together": 41
+    },
+    {
+      "character_id": 6954,
+      "character": "FATHER BARRY",
+      "gender": "M",
+      "number_of_lines_together": 39
+    },
+    {
+      "character_id": 6958,
+      "character": "JIMMY",
+      "gender": null,
+      "number_of_lines_together": 20
+    },
+    {
+      "character_id": 6959,
+      "character": "JOCKO",
+      "gender": null,
+      "number_of_lines_together": 13
+    },
+    {
+      "character_id": 6963,
+      "character": "MUTT",
+      "gender": null,
+      "number_of_lines_together": 11
+    },
+    {
+      "character_id": 6957,
+      "character": "JACKIE",
+      "gender": null,
+      "number_of_lines_together": 9
+    },
+    {
+      "character_id": 6964,
+      "character": "NOLAN",
+      "gender": null,
+      "number_of_lines_together": 9
+    },
+    {
+      "character_id": 6960,
+      "character": "JOEY",
+      "gender": null,
+      "number_of_lines_together": 7
+    },
+    {
+      "character_id": 6962,
+      "character": "MRS. COLLINS",
+      "gender": null,
+      "number_of_lines_together": 7
+    },
+    {
+      "character_id": 6949,
+      "character": "BARNEY",
+      "gender": null,
+      "number_of_lines_together": 6
+    }
+  ]
+}

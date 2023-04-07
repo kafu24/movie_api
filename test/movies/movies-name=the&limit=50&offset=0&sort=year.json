@@ -1,0 +1,352 @@
+[
+    {
+      "movie_id": 610,
+      "movie_title": "the wizard of oz",
+      "year": "1939",
+      "imdb_rating": 8.3,
+      "imdb_votes": 104873
+    },
+    {
+      "movie_id": 558,
+      "movie_title": "the third man",
+      "year": "1949",
+      "imdb_rating": 8.5,
+      "imdb_votes": 51872
+    },
+    {
+      "movie_id": 465,
+      "movie_title": "on the waterfront",
+      "year": "1954",
+      "imdb_rating": 8.4,
+      "imdb_votes": 42010
+    },
+    {
+      "movie_id": 509,
+      "movie_title": "the searchers",
+      "year": "1956",
+      "imdb_rating": 8.1,
+      "imdb_votes": 30138
+    },
+    {
+      "movie_id": 246,
+      "movie_title": "the apartment",
+      "year": "1960",
+      "imdb_rating": 8.4,
+      "imdb_votes": 37301
+    },
+    {
+      "movie_id": 208,
+      "movie_title": "the birds",
+      "year": "1963",
+      "imdb_rating": 7.9,
+      "imdb_votes": 53233
+    },
+    {
+      "movie_id": 536,
+      "movie_title": "dr. strangelove or: how i learned to stop worrying and love the bomb",
+      "year": "1964",
+      "imdb_rating": 8.6,
+      "imdb_votes": 158529
+    },
+    {
+      "movie_id": 77,
+      "movie_title": "the graduate",
+      "year": "1967",
+      "imdb_rating": 8.2,
+      "imdb_votes": 79677
+    },
+    {
+      "movie_id": 357,
+      "movie_title": "the french connection",
+      "year": "1971",
+      "imdb_rating": 7.9,
+      "imdb_votes": 34062
+    },
+    {
+      "movie_id": 203,
+      "movie_title": "the godfather",
+      "year": "1972",
+      "imdb_rating": 9.2,
+      "imdb_votes": 419312
+    },
+    {
+      "movie_id": 341,
+      "movie_title": "the exorcist",
+      "year": "1973",
+      "imdb_rating": 8.1,
+      "imdb_votes": 106383
+    },
+    {
+      "movie_id": 568,
+      "movie_title": "the sting",
+      "year": "1973",
+      "imdb_rating": 8.4,
+      "imdb_votes": 67231
+    },
+    {
+      "movie_id": 369,
+      "movie_title": "the godfather: part ii",
+      "year": "1974",
+      "imdb_rating": 9,
+      "imdb_votes": 251290
+    },
+    {
+      "movie_id": 445,
+      "movie_title": "monty python and the holy grail",
+      "year": "1975",
+      "imdb_rating": 8.4,
+      "imdb_votes": 157683
+    },
+    {
+      "movie_id": 463,
+      "movie_title": "one flew over the cuckoo's nest",
+      "year": "1975",
+      "imdb_rating": 8.9,
+      "imdb_votes": 219739
+    },
+    {
+      "movie_id": 490,
+      "movie_title": "the rocky horror picture show",
+      "year": "1975",
+      "imdb_rating": 7.1,
+      "imdb_votes": 42713
+    },
+    {
+      "movie_id": 239,
+      "movie_title": "all the president's men",
+      "year": "1976",
+      "imdb_rating": 8,
+      "imdb_votes": 32717
+    },
+    {
+      "movie_id": 320,
+      "movie_title": "the deer hunter",
+      "year": "1978",
+      "imdb_rating": 8.2,
+      "imdb_votes": 89841
+    },
+    {
+      "movie_id": 53,
+      "movie_title": "the elephant man",
+      "year": "1980",
+      "imdb_rating": 8.4,
+      "imdb_votes": 59625
+    },
+    {
+      "movie_id": 514,
+      "movie_title": "the shining",
+      "year": "1980",
+      "imdb_rating": 8.5,
+      "imdb_votes": 182077
+    },
+    {
+      "movie_id": 193,
+      "movie_title": "star trek: the wrath of khan",
+      "year": "1982",
+      "imdb_rating": 7.8,
+      "imdb_votes": 36503
+    },
+    {
+      "movie_id": 213,
+      "movie_title": "the thing",
+      "year": "1982",
+      "imdb_rating": 8.2,
+      "imdb_votes": 80904
+    },
+    {
+      "movie_id": 489,
+      "movie_title": "star wars: episode vi - return of the jedi",
+      "year": "1983",
+      "imdb_rating": 8.3,
+      "imdb_votes": 215058
+    },
+    {
+      "movie_id": 99,
+      "movie_title": "indiana jones and the temple of doom",
+      "year": "1984",
+      "imdb_rating": 7.5,
+      "imdb_votes": 112054
+    },
+    {
+      "movie_id": 549,
+      "movie_title": "the terminator",
+      "year": "1984",
+      "imdb_rating": 8.1,
+      "imdb_votes": 183538
+    },
+    {
+      "movie_id": 253,
+      "movie_title": "back to the future",
+      "year": "1985",
+      "imdb_rating": 8.4,
+      "imdb_votes": 207376
+    },
+    {
+      "movie_id": 212,
+      "movie_title": "the lost boys",
+      "year": "1987",
+      "imdb_rating": 7,
+      "imdb_votes": 34826
+    },
+    {
+      "movie_id": 480,
+      "movie_title": "the princess bride",
+      "year": "1987",
+      "imdb_rating": 8.1,
+      "imdb_votes": 125281
+    },
+    {
+      "movie_id": 98,
+      "movie_title": "indiana jones and the last crusade",
+      "year": "1989",
+      "imdb_rating": 8.3,
+      "imdb_votes": 174947
+    },
+    {
+      "movie_id": 232,
+      "movie_title": "the abyss",
+      "year": "1989",
+      "imdb_rating": 7.6,
+      "imdb_votes": 51699
+    },
+    {
+      "movie_id": 216,
+      "movie_title": "thelma & louise",
+      "year": "1991",
+      "imdb_rating": 7.3,
+      "imdb_votes": 44372
+    },
+    {
+      "movie_id": 419,
+      "movie_title": "the silence of the lambs",
+      "year": "1991",
+      "imdb_rating": 8.7,
+      "imdb_votes": 251237
+    },
+    {
+      "movie_id": 459,
+      "movie_title": "the nightmare before christmas",
+      "year": "1993",
+      "imdb_rating": 8,
+      "imdb_votes": 81753
+    },
+    {
+      "movie_id": 311,
+      "movie_title": "the crow",
+      "year": "1994",
+      "imdb_rating": 7.6,
+      "imdb_votes": 55886
+    },
+    {
+      "movie_id": 395,
+      "movie_title": "the hudsucker proxy",
+      "year": "1994",
+      "imdb_rating": 7.4,
+      "imdb_votes": 32691
+    },
+    {
+      "movie_id": 399,
+      "movie_title": "interview with the vampire: the vampire chronicles",
+      "year": "1994",
+      "imdb_rating": 7.4,
+      "imdb_votes": 80077
+    },
+    {
+      "movie_id": 592,
+      "movie_title": "the usual suspects",
+      "year": "1995",
+      "imdb_rating": 8.7,
+      "imdb_votes": 272137
+    },
+    {
+      "movie_id": 206,
+      "movie_title": "the rock",
+      "year": "1996",
+      "imdb_rating": 7.3,
+      "imdb_votes": 109533
+    },
+    {
+      "movie_id": 334,
+      "movie_title": "the english patient",
+      "year": "1996",
+      "imdb_rating": 7.3,
+      "imdb_votes": 55247
+    },
+    {
+      "movie_id": 5,
+      "movie_title": "the fifth element",
+      "year": "1997",
+      "imdb_rating": 7.5,
+      "imdb_votes": 133756
+    },
+    {
+      "movie_id": 303,
+      "movie_title": "conspiracy theory",
+      "year": "1997",
+      "imdb_rating": 6.5,
+      "imdb_votes": 36045
+    },
+    {
+      "movie_id": 410,
+      "movie_title": "the lost world: jurassic park",
+      "year": "1997",
+      "imdb_rating": 6,
+      "imdb_votes": 78169
+    },
+    {
+      "movie_id": 550,
+      "movie_title": "the game",
+      "year": "1997",
+      "imdb_rating": 7.7,
+      "imdb_votes": 75861
+    },
+    {
+      "movie_id": 598,
+      "movie_title": "wag the dog",
+      "year": "1997",
+      "imdb_rating": 7.1,
+      "imdb_votes": 36448
+    },
+    {
+      "movie_id": 217,
+      "movie_title": "there's something about mary",
+      "year": "1998",
+      "imdb_rating": 7.2,
+      "imdb_votes": 97546
+    },
+    {
+      "movie_id": 269,
+      "movie_title": "the big lebowski",
+      "year": "1998",
+      "imdb_rating": 8.2,
+      "imdb_votes": 182170
+    },
+    {
+      "movie_id": 333,
+      "movie_title": "enemy of the state",
+      "year": "1998",
+      "imdb_rating": 7.2,
+      "imdb_votes": 67504
+    },
+    {
+      "movie_id": 456,
+      "movie_title": "the negotiator",
+      "year": "1998",
+      "imdb_rating": 7.2,
+      "imdb_votes": 46983
+    },
+    {
+      "movie_id": 555,
+      "movie_title": "the truman show",
+      "year": "1998",
+      "imdb_rating": 8,
+      "imdb_votes": 160825
+    },
+    {
+      "movie_id": 556,
+      "movie_title": "the x files",
+      "year": "1998",
+      "imdb_rating": 6.8,
+      "imdb_votes": 39090
+    }
+  ]

@@ -1,0 +1,79 @@
+[
+    {
+      "movie_id": 372,
+      "movie_title": "goodfellas",
+      "year": "1990",
+      "imdb_rating": 8.8,
+      "imdb_votes": 234582
+    },
+    {
+      "movie_id": 98,
+      "movie_title": "indiana jones and the last crusade",
+      "year": "1989",
+      "imdb_rating": 8.3,
+      "imdb_votes": 174947
+    },
+    {
+      "movie_id": 411,
+      "movie_title": "jurassic park",
+      "year": "1993",
+      "imdb_rating": 7.9,
+      "imdb_votes": 153737
+    },
+    {
+      "movie_id": 409,
+      "movie_title": "jurassic park iii",
+      "year": "2001",
+      "imdb_rating": 5.7,
+      "imdb_votes": 62564
+    },
+    {
+      "movie_id": 116,
+      "movie_title": "leaving las vegas",
+      "year": "1995",
+      "imdb_rating": 7.6,
+      "imdb_votes": 42919
+    },
+    {
+      "movie_id": 139,
+      "movie_title": "mr. smith goes to washington",
+      "year": "1939",
+      "imdb_rating": 8.4,
+      "imdb_votes": 33984
+    },
+    {
+      "movie_id": 162,
+      "movie_title": "pleasantville",
+      "year": "1998",
+      "imdb_rating": 7.5,
+      "imdb_votes": 49669
+    },
+    {
+      "movie_id": 410,
+      "movie_title": "the lost world: jurassic park",
+      "year": "1997",
+      "imdb_rating": 6,
+      "imdb_votes": 78169
+    },
+    {
+      "movie_id": 429,
+      "movie_title": "the man in the iron mask",
+      "year": "1998/I",
+      "imdb_rating": 6.1,
+      "imdb_votes": 36684
+    },
+    {
+      "movie_id": 553,
+      "movie_title": "the man who wasn't there",
+      "year": "2001",
+      "imdb_rating": 7.7,
+      "imdb_votes": 41452
+    },
+    {
+      "movie_id": 459,
+      "movie_title": "the nightmare before christmas",
+      "year": "1993",
+      "imdb_rating": 8,
+      "imdb_votes": 81753
+    }
+  ]

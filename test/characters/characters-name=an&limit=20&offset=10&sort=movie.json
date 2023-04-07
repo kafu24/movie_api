@@ -1,0 +1,122 @@
+[
+    {
+      "character_id": 3820,
+      "character": "LANDON",
+      "movie": "a walk to remember",
+      "number_of_lines": 239
+    },
+    {
+      "character_id": 3823,
+      "character": "REV. SULLIVAN",
+      "movie": "a walk to remember",
+      "number_of_lines": 43
+    },
+    {
+      "character_id": 157,
+      "character": "CHIEF MECHANIC",
+      "movie": "air force one",
+      "number_of_lines": 4
+    },
+    {
+      "character_id": 159,
+      "character": "DEAN",
+      "movie": "air force one",
+      "number_of_lines": 4
+    },
+    {
+      "character_id": 177,
+      "character": "V.P. CHANDLER",
+      "movie": "air force one",
+      "number_of_lines": 16
+    },
+    {
+      "character_id": 210,
+      "character": "RANDY",
+      "movie": "airplane!",
+      "number_of_lines": 17
+    },
+    {
+      "character_id": 212,
+      "character": "SISTER ANGELINA",
+      "movie": "airplane!",
+      "number_of_lines": 3
+    },
+    {
+      "character_id": 3585,
+      "character": "STANDARD",
+      "movie": "alien",
+      "number_of_lines": 224
+    },
+    {
+      "character_id": 231,
+      "character": "GORMAN",
+      "movie": "aliens",
+      "number_of_lines": 33
+    },
+    {
+      "character_id": 239,
+      "character": "VAN LEUWEN",
+      "movie": "aliens",
+      "number_of_lines": 5
+    },
+    {
+      "character_id": 3610,
+      "character": "PIANIST",
+      "movie": "all about eve",
+      "number_of_lines": 4
+    },
+    {
+      "character_id": 3620,
+      "character": "HANNAH",
+      "movie": "all the president's men",
+      "number_of_lines": 7
+    },
+    {
+      "character_id": 3623,
+      "character": "JANE",
+      "movie": "all the president's men",
+      "number_of_lines": 5
+    },
+    {
+      "character_id": 3633,
+      "character": "SLOAN",
+      "movie": "all the president's men",
+      "number_of_lines": 27
+    },
+    {
+      "character_id": 242,
+      "character": "ANDANTE",
+      "movie": "amadeus",
+      "number_of_lines": 3
+    },
+    {
+      "character_id": 247,
+      "character": "CONSTANZE",
+      "movie": "amadeus",
+      "number_of_lines": 106
+    },
+    {
+      "character_id": 261,
+      "character": "SCHIKANEDER",
+      "movie": "amadeus",
+      "number_of_lines": 37
+    },
+    {
+      "character_id": 264,
+      "character": "SERVANT",
+      "movie": "amadeus",
+      "number_of_lines": 4
+    },
+    {
+      "character_id": 265,
+      "character": "UGLY OLD WOMAN",
+      "movie": "amadeus",
+      "number_of_lines": 6
+    },
+    {
+      "character_id": 3649,
+      "character": "PORNO-CHANNEL CHICK",
+      "movie": "american pie",
+      "number_of_lines": 5
+    }
+  ]
