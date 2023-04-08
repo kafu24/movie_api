@@ -25,11 +25,11 @@ def get_movie(movie_id: int):
     """
     response = {}
     try:
-        movie = db.movies[movie_id]
-        response["movie_id"] = int(movie_id)
+        movie = db.movies[str(movie_id)]
+        response["movie_id"] = movie_id
         response["title"] = movie["title"]
         response["top_characters"] = []
-        characters = query_lines_get_movie(movie_id)
+        characters = query_lines_get_movie(str(movie_id))
         for character in characters:
             chara_dict = {}
             chara_dict["character_id"] = int(character[0])
