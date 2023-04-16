@@ -59,7 +59,7 @@ def query_convos_get_char(char_id: str) -> list[tuple]:
     Sorted by descending order # of lines then by increasing `character_id`.
     """
     convos = {}
-    for conversation in db.conversations:
+    for conversation in db.conversations.values():
         if conversation["character1_id"] == char_id:
             count = len(db.lines_con_id[conversation["conversation_id"]])
             convos[conversation["character2_id"]] = convos.get(conversation["character2_id"], 0) + count

@@ -20,25 +20,16 @@ with open("characters.csv", mode="r", encoding="utf8") as csv_file:
 print("reading conversations")
 
 with open("conversations.csv", mode="r", encoding="utf8") as csv_file:
-    conversations = [
-        {k: v for k, v in row.items()}
-        for row in csv.DictReader(csv_file, skipinitialspace=True)
-    ]
-    # reader = csv.DictReader(csv_file, skipinitialspace=True)
-    # conversations = defaultdict(list)
-    # # Use movie_id for key because its easily accessible and nothing seems to need conversation_id
-    # for row in reader:
-    #     conversations[row["movie_id"]].append({k: v for k, v in row.items()})
+    reader = csv.DictReader(csv_file, skipinitialspace=True)
+    conversations = {}
+    for row in reader:
+        conversations[row["conversation_id"]] = {k: v for k, v in row.items()}
 
 print("reading lines")
 
 with open("lines.csv", mode="r", encoding="utf8") as csv_file:
-    lines = [
-        {k: v for k, v in row.items()}
-        for row in csv.DictReader(csv_file, skipinitialspace=True)
-    ]
-    csv_file.seek(0)
     reader = csv.DictReader(csv_file, skipinitialspace=True)
+    lines = {}
     lines_con_id = defaultdict(list)
     lines_char_id = defaultdict(list)
     lines_movie_id = defaultdict(list)
@@ -47,6 +38,7 @@ with open("lines.csv", mode="r", encoding="utf8") as csv_file:
     # and movies by their id... This really is the most important file, huh?
     # Let's just assume there's going to be more movies for characters in the future :^)
     for row in reader:
+        lines[row["line_id"]] = {k: v for k, v in row.items()}
         lines_con_id[row["conversation_id"]].append({k: v for k, v in row.items()})
         lines_char_id[row["character_id"]].append({k: v for k, v in row.items()})
         lines_movie_id[row["movie_id"]].append({k: v for k, v in row.items()})
