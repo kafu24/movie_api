@@ -17,15 +17,15 @@ def get_line(line_id: int):
     """
     response = {}
     try:
-        line = db.lines[str(line_id)]
+        line = db.lines[line_id]
     except KeyError:
         raise HTTPException(status_code=404, detail="line not found")
     
     response["line_id"] = line_id
-    response["line_text"] = line["line_text"]
-    response["character"] = db.characters[line["character_id"]]["name"]
-    response["movie"] = db.movies[line["movie_id"]]["title"]
-    response["conversation_id"] = int(line["conversation_id"])
+    response["line_text"] = line.line_text
+    response["character"] = db.characters[line.c_id].name
+    response["movie"] = db.movies[line.movie_id].title
+    response["conversation_id"] = line.conv_id
 
     return response
 
@@ -43,17 +43,19 @@ def get_conversation(conversation_id: int):
     """
     response = []
     try:
-        conversation = db.conversations[str(conversation_id)]
+        conversation = db.conversations[conversation_id]
     except KeyError:
         raise HTTPException(status_code=404, detail="conversation not found")
     
-    for c in sorted(db.lines_con_id[conversation["conversation_id"]], key=itemgetter("line_sort")):
+    items = list(filter(lambda l: conversation_id == l.conv_id, db.lines.values()))
+    items.sort(key=lambda l: l.line_sort)
+    for l in items:
         response.append(
             {
-                "line_id": int(c["line_id"]),
-                "character": db.characters[c["character_id"]]["name"],
-                "movie": db.movies[c["movie_id"]]["title"],
-                "line_text": c["line_text"]
+                "line_id": l.id,
+                "character": db.characters[l.c_id].name,
+                "movie": db.movies[l.movie_id].title,
+                "line_text": l.line_text
             }
         )
 
@@ -74,20 +76,20 @@ def get_character_lines(character_id: int):
     """
     response = []
     try:
-        lines = db.lines_char_id[str(character_id)]
+        lines = db.characters[character_id]
     except KeyError:
         raise HTTPException(status_code=404, detail="character not found")
     
-    # This should already be sorted, but it's not a big deal to be careful.
-    lines.sort(key=itemgetter("line_id"))
-    for line in lines:
+    items = list(filter(lambda l: character_id == l.c_id, db.lines.values()))
+    items.sort(key=lambda l: l.id)
+    for line in items:
         response.append(
             {
-                "line_id": int(line["line_id"]),
-                "character": db.characters[str(character_id)]["name"],
-                "movie": db.movies[line["movie_id"]]["title"],
-                "conversation_id": int(line["conversation_id"]),
-                "line_text": line["line_text"]
+                "line_id": line.id,
+                "character": db.characters[character_id].name,
+                "movie": db.movies[line.movie_id].title,
+                "conversation_id": line.conv_id,
+                "line_text": line.line_text
             }
         )
     
