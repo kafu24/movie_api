@@ -9,6 +9,7 @@ Movie API returns dialog statistics on top hollywood movies from decades past.
 You can:
 * **list characters with sorting and filtering options.**
 * **retrieve a specific character by id**
+* **retrieve a lines by a character by their id**
 
 ## Movies
 
