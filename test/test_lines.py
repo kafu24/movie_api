@@ -24,7 +24,7 @@ def test_get_conversation_01():
 
 
 def test_get_character_lines_01():
-    response = client.get("/lines/characters/6957")
+    response = client.get("/characters/6957/lines")
     assert response.status_code == 200
 
     with open("test/lines/character_id=6957.json", encoding="utf-8") as f:

@@ -15,6 +15,7 @@ You can:
 You can:
 * **list movies with sorting and filtering options.**
 * **retrieve a specific movie by id**
+* **add a specific conversation by movie id**
 
 ## Lines
 

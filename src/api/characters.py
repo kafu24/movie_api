@@ -137,3 +137,36 @@ def list_characters(
         for c in items[offset : offset + limit]
     )
     return json
+
+@router.get("/characters/{character_id}/lines", tags=["lines", "characters"])
+def get_character_lines(character_id: int):
+    """
+    This endpoint creates a list of all lines spoken by a character. The lines
+    are in ascending order based on their line_id (aka chronologically).
+    Each line is represented by a dictionary with keys:
+    * `line_id`: the internal id of the line
+    * `character`: the name of the character speaking the line
+    * `movie`: the title of the movie the line is from
+    * `conversation_id`: the internal id of the conversation the line is from
+    * `line_text`: the text of the line
+    """
+    response = []
+    try:
+        lines = db.characters[character_id]
+    except KeyError:
+        raise HTTPException(status_code=404, detail="character not found")
+    
+    items = list(filter(lambda l: character_id == l.c_id, db.lines.values()))
+    items.sort(key=lambda l: l.id)
+    for line in items:
+        response.append(
+            {
+                "line_id": line.id,
+                "character": db.characters[character_id].name,
+                "movie": db.movies[line.movie_id].title,
+                "conversation_id": line.conv_id,
+                "line_text": line.line_text
+            }
+        )
+    
+    return response

@@ -51,7 +51,6 @@ def upload_new_log():
         {"x-upsert": "true"},
     )
 
-
 # END PLACEHOLDER CODE
 
 
