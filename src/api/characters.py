@@ -10,23 +10,6 @@ import sqlalchemy
 router = APIRouter()
 
 
-def get_top_conv_characters(character):
-    c_id = character.id
-    movie_id = character.movie_id
-    all_convs = filter(
-        lambda conv: conv.movie_id == movie_id
-        and (conv.c1_id == c_id or conv.c2_id == c_id),
-        db.conversations.values(),
-    )
-    line_counts = Counter()
-
-    for conv in all_convs:
-        other_id = conv.c2_id if conv.c1_id == c_id else conv.c1_id
-        line_counts[other_id] += conv.num_lines
-
-    return line_counts.most_common()
-
-
 @router.get("/characters/{id}", tags=["characters"])
 def get_character(id: int):
     """
@@ -73,6 +56,18 @@ def get_character(id: int):
         .join(db.lines, db.lines.c.conversation_id == db.conversations.c.conversation_id)
         .group_by(db.characters.c.character_id, db.conversations.c.conversation_id)
     )
+
+    # with db.engine.connect() as conn:
+        # thing = conn.execute(sqlalchemy.text(
+        #     """SELECT conversation_id
+        #     FROM conversations
+        #     WHERE (character1_id = (:x)) or (character2_id = (:x))
+        #     """
+        #     ),
+        #     [{"x": id}]
+        # )
+        # for row in thing:
+        #     print(row)
 
     with db.engine.connect() as conn:
         result = conn.execute(stmt) # Should only return one row
@@ -210,22 +205,35 @@ def get_character_lines(character_id: int):
     * `line_text`: the text of the line
     """
     response = []
-    try:
-        lines = db.characters[character_id]
-    except KeyError:
-        raise HTTPException(status_code=404, detail="character not found")
-    
-    items = list(filter(lambda l: character_id == l.c_id, db.lines.values()))
-    items.sort(key=lambda l: l.id)
-    for line in items:
-        response.append(
-            {
-                "line_id": line.id,
-                "character": db.characters[character_id].name,
-                "movie": db.movies[line.movie_id].title,
-                "conversation_id": line.conv_id,
-                "line_text": line.line_text
-            }
+
+    stmt = (
+        sqlalchemy.select(
+            db.lines.c.line_id,
+            db.characters.c.name,
+            db.movies.c.title,
+            db.lines.c.conversation_id,
+            db.lines.c.line_text,
         )
-    
+        .where(db.lines.c.character_id == character_id)
+        .join(db.characters, db.characters.c.character_id == db.lines.c.character_id)
+        .join(db.movies, db.movies.c.movie_id == db.lines.c.movie_id)
+        .group_by(db.lines.c.line_id, db.characters.c.character_id, db.movies.c.movie_id)
+        .order_by(db.lines.c.line_id)
+    )
+
+    with db.engine.connect() as conn:
+        result = conn.execute(stmt)
+        for row in result:
+            if row is None:
+                raise HTTPException(status_code=404, detail="character not found")
+            response.append(
+                {
+                    "line_id": row.line_id,
+                    "character": row.name,
+                    "movie": row.title,
+                    "conversation_id": row.conversation_id,
+                    "line_text": row.line_text,
+                }
+            )
+        
     return response

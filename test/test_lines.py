@@ -31,6 +31,10 @@ def test_get_character_lines_01():
         assert response.json() == json.load(f)
 
 
-def test_404():
+def test_404_01():
     response = client.get("/lines/7414")
+    assert response.status_code == 404
+
+def test_404_02():
+    response = client.get("/lines/conversations/1231231231237414")
     assert response.status_code == 404

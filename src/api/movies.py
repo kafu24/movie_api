@@ -42,6 +42,7 @@ def get_movie(movie_id: int):
         .group_by(db.lines.c.character_id, db.characters.c.name)
         .order_by(sqlalchemy.desc("count"))
         .order_by(db.lines.c.character_id)
+        .limit(5)
     )
 
     result = None
@@ -58,10 +59,6 @@ def get_movie(movie_id: int):
                     "num_lines": row.count,
                 }
             )
-            # Don't know if there's a better way, CursorResult is weird
-            control += 1
-            if control == 5:
-                break
         # Get names from ids
         for row in movie:
             result = {
