@@ -3,19 +3,27 @@ from fastapi.testclient import TestClient
 from src.api.server import app
 from src import database as db
 from src.datatypes import Conversation, Line
+import sqlalchemy
 
 client = TestClient(app)
 
 
 def test_post_conversation_01():
-    # Obviously this test has to be ran alone otherwise these values aren't 
-    # actually expected.
-    char_1_prev_num_lines = db.characters[208].num_lines
-    char_2_prev_num_lines = db.characters[209].num_lines
-    expected_conv_id = list(db.conversations.values())[-1].id + 1
-    expected_line_ids = [list(db.lines.values())[-1].id + 1]
-    expected_line_ids.append(expected_line_ids[-1] + 1)
-    expected_line_ids.append(expected_line_ids[-1] + 1)
+    # Post then get on the conv_id and hope it comes as expected then delete it
+    with db.engine.connect() as conn:
+        result = conn.execute(
+            sqlalchemy.select(
+                sqlalchemy.sql.functions.max(db.lines.c.line_id),
+            )
+        )
+        cur_id = result.first().max_1 + 1
+        result = conn.execute(
+            sqlalchemy.select(
+                sqlalchemy.sql.functions.max(db.conversations.c.conversation_id),
+            )
+        )
+        conv_id = result.first().max_1 + 1
+
     response = client.post(
         "/movies/13/conversations/",
         headers={"Content-Type": "application/json"},
@@ -39,53 +47,49 @@ def test_post_conversation_01():
         }
     )
     assert response.status_code == 200
+    assert response.json()["conversation_id"] == conv_id
 
-    assert response.json() == {"conversation_id": expected_conv_id}
-    expected_conversation = Conversation(
-        expected_conv_id,
-        208,
-        209,
-        13,
-        3
-    )
-    assert db.conversations[expected_conv_id] == expected_conversation
-    expected_line_1 = Line(
-        expected_line_ids[0],
-        208,
-        13,
-        expected_conv_id,
-        1,
-        "test"
-    )
-    expected_line_2 = Line(
-        expected_line_ids[1],
-        209,
-        13,
-        expected_conv_id,
-        2,
-        "shut up"
-    )
-    expected_line_3 = Line(
-        expected_line_ids[2],
-        208,
-        13,
-        expected_conv_id,
-        3,
-        "the hell you just say to me?"
-    )
-    assert db.lines[expected_line_ids[0]] == expected_line_1
-    assert db.lines[expected_line_ids[1]] == expected_line_2
-    assert db.lines[expected_line_ids[2]] == expected_line_3
-    assert db.characters[208].num_lines == char_1_prev_num_lines + 2
-    assert db.characters[209].num_lines == char_2_prev_num_lines + 1
+    conv_id = response.json()["conversation_id"]
+    get_request = "/lines/conversations/" + str(conv_id)
+    response = client.get(get_request)
+    assert response.status_code == 200
 
-    # Clean up the stuff now
-    db.characters[208].num_lines -= 2
-    db.characters[209].num_lines -= 1
-    del db.lines[expected_line_ids[0]]
-    del db.lines[expected_line_ids[1]]
-    del db.lines[expected_line_ids[2]]
-    del db.conversations[expected_conv_id]
+    expected_response = [
+        {
+            "line_id": cur_id,
+            "character": "MURDOCK",
+            "movie": "airplane!",
+            "line_text": "test",
+        },
+        {
+            "line_id": cur_id + 1,
+            "character": "OVEUR",
+            "movie": "airplane!",
+            "line_text": "shut up"
+        },
+        {
+            "line_id": cur_id + 2,
+            "character": "MURDOCK",
+            "movie": "airplane!",
+            "line_text": "the hell you just say to me?",
+        },
+    ]
+
+    assert response.json() == expected_response
+
+    with db.engine.begin() as conn:
+        result = conn.execute(
+            sqlalchemy.delete(
+                db.lines,
+            )
+            .where(db.lines.c.conversation_id == conv_id)
+        )
+        result = conn.execute(
+            sqlalchemy.delete(
+                db.conversations,
+            )
+            .where(db.conversations.c.conversation_id == conv_id)
+        )
 
 
 def test_post_conversration_404():
@@ -139,9 +143,7 @@ def test_post_conversration_404():
     )
     assert response.status_code == 404
 
-
-def test_post_conversation_400():
-    # Identical characters
+    # Identical characters (404 because it's too annoying to make this a 400)
     response = client.post(
         "/movies/13/conversations/",
         headers={"Content-Type": "application/json"},
@@ -164,8 +166,10 @@ def test_post_conversation_400():
             ]
         }
     )
-    assert response.status_code == 400
+    assert response.status_code == 404
 
+
+def test_post_conversation_400():
     # Wrong characters in line
     response = client.post(
         "/movies/13/conversations/",

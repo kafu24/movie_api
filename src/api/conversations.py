@@ -4,6 +4,7 @@ from src.datatypes import Character, Movie, Conversation, Line
 from pydantic import BaseModel
 from typing import List
 from datetime import datetime
+import sqlalchemy
 
 
 # FastAPI is inferring what the request body should look like
@@ -38,22 +39,86 @@ def add_conversation(movie_id: int, conversation: ConversationJson):
 
     The endpoint returns the id of the resulting conversation that was created.
     """
-    try:
-        movie = db.movies[movie_id]
-    except KeyError:
-        raise HTTPException(status_code=404, detail="movie not found.")
-    
-    try:
-        c1 = db.characters[conversation.character_1_id]
-        c2 = db.characters[conversation.character_2_id]
-    except KeyError:
-        raise HTTPException(status_code=404, detail="character not found.")
+    stmt = (
+        sqlalchemy.select(
+            db.characters.c.character_id,
+            db.characters.c.movie_id
+        )
+        .where(((db.characters.c.character_id == conversation.character_1_id)
+                | (db.characters.c.character_id == conversation.character_2_id))
+               & (db.characters.c.movie_id == movie_id))
+    )
 
-    if c1.movie_id != movie.id or c2.movie_id != movie.id:
-        raise HTTPException(status_code=404, detail="character not found in movie.")
-    if c1 == c2:
-        raise HTTPException(status_code=400, detail="identical characters given.")
-    
+    with db.engine.begin() as conn:
+        # Check if movie exists
+        result = conn.execute(
+            sqlalchemy.select(
+                db.movies.c.movie_id,
+            )
+            .where(db.movies.c.movie_id == movie_id)
+        )
+        result = result.first()
+        if result is None:
+            raise HTTPException(status_code=404, detail="movie not found.")
+        
+        # Check if the characters exist for that movie
+        result = conn.execute(stmt)
+        characters = []
+        for row in result:
+            characters.append(row)
+        if len(characters) != 2:
+            raise HTTPException(status_code=404, detail="improper characters given.")
+
+        # Get latest ids available
+        result = conn.execute(
+            sqlalchemy.select(
+                sqlalchemy.sql.functions.max(db.lines.c.line_id),
+            )
+        )
+        for row in result:
+            cur_id = row.max_1 + 1
+        
+        result = conn.execute(
+            sqlalchemy.select(
+                sqlalchemy.sql.functions.max(db.conversations.c.conversation_id),
+            )
+        )
+        for row in result:
+            conv_id = row.max_1 + 1
+
+        # Insert conversation_id into conversations first due to fkey
+        result = conn.execute(
+            sqlalchemy.insert(db.conversations)
+            .values(conversation_id=conv_id,
+                    character1_id=conversation.character_1_id,
+                    character2_id=conversation.character_2_id,
+                    movie_id=movie_id)
+        )
+
+        line_sort = 0
+        lines = []
+        for l in conversation.lines:
+            line_sort += 1
+            if (l.character_id != characters[0].character_id 
+                and l.character_id != characters[1].character_id):
+                raise HTTPException(status_code=400, detail="wrong character in lines.")
+            result = conn.execute(
+                sqlalchemy.insert(db.lines)
+                .values(line_id=cur_id, 
+                        character_id=l.character_id,
+                        movie_id=movie_id, 
+                        conversation_id=conv_id, 
+                        line_sort=line_sort,
+                        line_text=l.line_text)
+            )
+            cur_id += 1
+
+    db.logs.append({"post_call_time": datetime.now(), "movie_id_added_to": movie_id,
+                    "conversation_id": conv_id})
+    db.upload_new_log()
+
+    return {"conversation_id": conv_id}
+
     # Python 3.6+ preserves order in dict. This should get us unused ids, as long as
     # a new line or conversation isn't added to the database.
     cur_id = list(db.lines.values())[-1].id + 1
