@@ -1,7 +1,5 @@
 from fastapi import APIRouter, HTTPException
-from enum import Enum
 from src import database as db
-from operator import itemgetter
 import sqlalchemy
 
 router = APIRouter()

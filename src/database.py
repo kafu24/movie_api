@@ -1,6 +1,4 @@
 import csv
-from collections import defaultdict
-from src.datatypes import Character, Movie, Conversation, Line
 import os
 import io
 from supabase import Client, create_client
@@ -40,28 +38,28 @@ characters = sqlalchemy.Table("characters", metadata_obj, autoload_with=engine)
 conversations = sqlalchemy.Table("conversations", metadata_obj, autoload_with=engine)
 lines = sqlalchemy.Table("lines", metadata_obj, autoload_with=engine)
 
-# Reading in the log file from the supabase bucket
-log_csv = (
-    supabase.storage.from_("movie-api")
-    .download("movie_conversations_log.csv")
-    .decode("utf-8")
-)
+# # Reading in the log file from the supabase bucket
+# log_csv = (
+#     supabase.storage.from_("movie-api")
+#     .download("movie_conversations_log.csv")
+#     .decode("utf-8")
+# )
 
-logs = []
-for row in csv.DictReader(io.StringIO(log_csv), skipinitialspace=True):
-    logs.append(row)
+# logs = []
+# for row in csv.DictReader(io.StringIO(log_csv), skipinitialspace=True):
+#     logs.append(row)
 
 
-# Writing to the log file and uploading to the supabase bucket
-def upload_new_log():
-    output = io.StringIO()
-    csv_writer = csv.DictWriter(
-        output, fieldnames=["post_call_time", "movie_id_added_to", "conversation_id"]
-    )
-    csv_writer.writeheader()
-    csv_writer.writerows(logs)
-    supabase.storage.from_("movie-api").upload(
-        "movie_conversations_log.csv",
-        bytes(output.getvalue(), "utf-8"),
-        {"x-upsert": "true"},
-    )
+# # Writing to the log file and uploading to the supabase bucket
+# def upload_new_log():
+#     output = io.StringIO()
+#     csv_writer = csv.DictWriter(
+#         output, fieldnames=["post_call_time", "movie_id_added_to", "conversation_id"]
+#     )
+#     csv_writer.writeheader()
+#     csv_writer.writerows(logs)
+#     supabase.storage.from_("movie-api").upload(
+#         "movie_conversations_log.csv",
+#         bytes(output.getvalue(), "utf-8"),
+#         {"x-upsert": "true"},
+#     )

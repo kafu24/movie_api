@@ -1,6 +1,5 @@
 from fastapi import APIRouter, HTTPException
 from src import database as db
-from src.datatypes import Character, Movie, Conversation, Line
 from pydantic import BaseModel
 from typing import List
 from datetime import datetime
@@ -112,8 +111,8 @@ def add_conversation(movie_id: int, conversation: ConversationJson):
             )
             cur_id += 1
 
-    db.logs.append({"post_call_time": datetime.now(), "movie_id_added_to": movie_id,
-                    "conversation_id": conv_id})
-    db.upload_new_log()
+    # db.logs.append({"post_call_time": datetime.now(), "movie_id_added_to": movie_id,
+    #                 "conversation_id": conv_id})
+    # db.upload_new_log()
 
     return {"conversation_id": conv_id}

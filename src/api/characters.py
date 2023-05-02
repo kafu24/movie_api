@@ -1,7 +1,6 @@
-import json
 from fastapi import APIRouter, HTTPException
 from enum import Enum
-from collections import Counter, defaultdict
+from collections import defaultdict
 from operator import itemgetter
 from fastapi.params import Query
 from src import database as db
