@@ -50,7 +50,6 @@ def get_movie(movie_id: int):
         movie = conn.execute(stmt) # How else to get the title? lol
         top_characters = conn.execute(stmt2)
         characters = []
-        control = 0
         for row in top_characters:
             characters.append(
                 {

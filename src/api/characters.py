@@ -43,6 +43,7 @@ def get_character(id: int):
         .group_by(db.characters.c.character_id, db.movies.c.title)
     )
 
+    # There's probably a better way to do this with "WITH" or something
     stmt2 = (
         sqlalchemy.select(
             db.conversations.c.conversation_id,
@@ -56,18 +57,6 @@ def get_character(id: int):
         .join(db.lines, db.lines.c.conversation_id == db.conversations.c.conversation_id)
         .group_by(db.characters.c.character_id, db.conversations.c.conversation_id)
     )
-
-    # with db.engine.connect() as conn:
-        # thing = conn.execute(sqlalchemy.text(
-        #     """SELECT conversation_id
-        #     FROM conversations
-        #     WHERE (character1_id = (:x)) or (character2_id = (:x))
-        #     """
-        #     ),
-        #     [{"x": id}]
-        # )
-        # for row in thing:
-        #     print(row)
 
     with db.engine.connect() as conn:
         result = conn.execute(stmt) # Should only return one row

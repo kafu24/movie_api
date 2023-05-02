@@ -96,7 +96,6 @@ def add_conversation(movie_id: int, conversation: ConversationJson):
         )
 
         line_sort = 0
-        lines = []
         for l in conversation.lines:
             line_sort += 1
             if (l.character_id != characters[0].character_id 
@@ -115,67 +114,6 @@ def add_conversation(movie_id: int, conversation: ConversationJson):
 
     db.logs.append({"post_call_time": datetime.now(), "movie_id_added_to": movie_id,
                     "conversation_id": conv_id})
-    db.upload_new_log()
-
-    return {"conversation_id": conv_id}
-
-    # Python 3.6+ preserves order in dict. This should get us unused ids, as long as
-    # a new line or conversation isn't added to the database.
-    cur_id = list(db.lines.values())[-1].id + 1
-    while cur_id in db.lines.keys():
-        cur_id += 1   
-
-    conv_id = list(db.conversations.values())[-1].id + 1
-    while conv_id in db.conversations.keys():
-        conv_id += 1
-
-    line_sort = 0
-    lines = []
-    for l in conversation.lines:
-        line_sort += 1
-        if l.character_id != c1.id and l.character_id != c2.id:
-            raise HTTPException(status_code=400, detail="wrong character in lines.")
-        new_line = Line(
-            cur_id,
-            l.character_id,
-            movie_id,
-            conv_id,
-            line_sort,
-            l.line_text
-        )
-        lines.append({
-            "line_id": cur_id,
-            "character_id": l.character_id,
-            "movie_id": movie_id,
-            "conversation_id": conv_id,
-            "line_sort": line_sort,
-            "line_text": l.line_text
-        })
-        # Hope nothing was added here otherwise we're overwriting something.
-        db.lines[cur_id] = new_line
-        db.characters[l.character_id].num_lines += 1
-        cur_id += 1
-
-    new_conversation = Conversation(
-        conv_id,
-        conversation.character_1_id,
-        conversation.character_2_id,
-        movie_id,
-        line_sort
-    )
-    new_conversation_json = [{
-        "conversation_id": conv_id,
-        "character1_id": conversation.character_1_id,
-        "character2_id": conversation.character_2_id,
-        "movie_id": movie_id
-    }]
-    
-    # Again, if something was added here we're overwriting something.
-    db.conversations[conv_id] = new_conversation
-    # I don't know what I'm doing.
-    # db.upload_new_lines(lines)
-    # db.upload_new_conversations(new_conversation_json)
-    db.logs.append({"post_call_time": datetime.now(), "movie_id_added_to": movie_id})
     db.upload_new_log()
 
     return {"conversation_id": conv_id}
